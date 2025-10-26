@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Da Informação ao Conhecimento: Guia Interativo</title>
+    <style>
+        :root {
+            --color-primary: #2196F3;
+            --color-primary-dark: #1976D2;
+            --color-secondary: #4CAF50;
+            --color-accent: #FF9800;
+            --color-accent-light: #FFB74D;
+            --color-background: #F5F5F5;
+            --color-surface: #FFFFFF;
+            --color-text: #212121;
+            --color-text-secondary: #757575;
+            --color-border: #E0E0E0;
+            --color-success: #4CAF50;
+            --color-error: #F44336;
+            --color-warning: #FF9800;
+            --color-info: #2196F3;
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 8px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 16px rgba(0,0,0,0.15);
+            --font-size-base: 16px;
+            --font-size-sm: 14px;
+            --font-size-lg: 18px;
+            --font-size-xl: 24px;
+            --font-size-xxl: 32px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-size: var(--font-size-base);
+            line-height: 1.6;
+            color: var(--color-text);
+            background-color: var(--color-background);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--color-primary);
+            color: white;
+            padding: var(--space-sm) 0;
+            box-shadow: var(--shadow-md);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-sm);
+        }
+
+        .nav-title {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            list-style: none;
+        }
+
+        .nav-menu li a {
+            color: white;
+            text-decoration: none;
+            font-size: var(--font-size-sm);
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            display: block;
+        }
+
+        .nav-menu li a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 140px;
+            padding-bottom: var(--space-xl);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-sm);
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: var(--space-xl);
+            padding: var(--space-lg);
+            background-color: var(--color-surface);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .section-header {
+            margin-bottom: var(--space-md);
+        }
+
+        .section-title {
+            font-size: var(--font-size-xxl);
+            color: var(--color-primary);
+            margin-bottom: var(--space-xs);
+            font-weight: 600;
+        }
+
+        .section-subtitle {
+            font-size: var(--font-size-lg);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-md);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: white;
+            text-align: center;
+            padding: var(--space-xl) var(--space-lg);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .hero h1 {
+            font-size: var(--font-size-xxl);
+            margin-bottom: var(--space-sm);
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: var(--font-size-lg);
+            opacity: 0.95;
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-md);
+            margin: var(--space-md) 0;
+        }
+
+        .card {
+            background-color: var(--color-surface);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 2px solid var(--color-border);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .card-icon {
+            font-size: 40px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .card-title {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .card-text {
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Comparison Box */
+        .comparison-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-md);
+            margin: var(--space-md) 0;
+        }
+
+        .comparison-item {
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .comparison-item:nth-child(1) {
+            background-color: #E3F2FD;
+            border-left-color: #2196F3;
+        }
+
+        .comparison-item:nth-child(2) {
+            background-color: #E8F5E9;
+            border-left-color: #4CAF50;
+        }
+
+        .comparison-item:nth-child(3) {
+            background-color: #FFF3E0;
+            border-left-color: #FF9800;
+        }
+
+        .comparison-item h3 {
+            font-size: var(--font-size-lg);
+            margin-bottom: var(--space-xs);
+            font-weight: 600;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background-color: #FFF9C4;
+            border-left: 4px solid #FBC02D;
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            margin: var(--space-md) 0;
+            font-size: var(--font-size-lg);
+            font-weight: 500;
+            color: var(--color-text);
+        }
+
+        /* Accordion */
+        .accordion {
+            margin: var(--space-md) 0;
+        }
+
+        .accordion-item {
+            background-color: var(--color-surface);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-sm);
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            padding: var(--space-md);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--color-surface);
+            transition: var(--transition);
+            user-select: none;
+        }
+
+        .accordion-header:hover {
+            background-color: #F5F5F5;
+        }
+
+        .accordion-header.active {
+            background-color: #E3F2FD;
+        }
+
+        .accordion-title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            flex: 1;
+        }
+
+        .accordion-number {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            color: var(--color-primary);
+            min-width: 40px;
+        }
+
+        .accordion-emoji {
+            font-size: var(--font-size-xl);
+        }
+
+        .accordion-title {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .accordion-icon {
+            font-size: var(--font-size-xl);
+            color: var(--color-primary);
+            transition: var(--transition);
+        }
+
+        .accordion-icon.active {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .accordion-content.active {
+            max-height: 2000px;
+        }
+
+        .accordion-body {
+            padding: var(--space-md);
+            border-top: 2px solid var(--color-border);
+        }
+
+        .accordion-section {
+            margin-bottom: var(--space-md);
+        }
+
+        .accordion-section h4 {
+            color: var(--color-primary);
+            margin-bottom: var(--space-xs);
+            font-size: var(--font-size-base);
+            font-weight: 600;
+        }
+
+        .accordion-section ul {
+            padding-left: var(--space-md);
+            margin-top: var(--space-xs);
+        }
+
+        .accordion-section li {
+            margin-bottom: var(--space-xs);
+            line-height: 1.6;
+        }
+
+        .example-box {
+            background-color: #F0F4FF;
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--color-info);
+            margin-top: var(--space-sm);
+        }
+
+        /* Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--space-md) 0;
+            background-color: var(--color-surface);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: var(--space-md);
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .comparison-table th {
+            background-color: var(--color-primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tr:hover {
+            background-color: #F5F5F5;
+        }
+
+        /* Quiz */
+        .quiz-container {
+            margin: var(--space-md) 0;
+        }
+
+        .quiz-item {
+            background-color: var(--color-surface);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .quiz-question {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            color: var(--color-text);
+        }
+
+        .quiz-buttons {
+            display: flex;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-sm);
+        }
+
+        .quiz-btn {
+            flex: 1;
+            padding: var(--space-sm) var(--space-md);
+            border: 2px solid var(--color-primary);
+            background-color: white;
+            color: var(--color-primary);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .quiz-btn:hover {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        .quiz-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .quiz-feedback {
+            padding: var(--space-sm);
+            border-radius: var(--radius-sm);
+            margin-top: var(--space-sm);
+            font-weight: 500;
+            display: none;
+        }
+
+        .quiz-feedback.show {
+            display: block;
+        }
+
+        .quiz-feedback.correct {
+            background-color: #E8F5E9;
+            color: #2E7D32;
+            border: 2px solid #4CAF50;
+        }
+
+        .quiz-feedback.incorrect {
+            background-color: #FFEBEE;
+            color: #C62828;
+            border: 2px solid #F44336;
+        }
+
+        /* Checklist */
+        .checklist {
+            background-color: var(--color-surface);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            margin: var(--space-md) 0;
+        }
+
+        .checklist-item {
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            gap: var(--space-md);
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .checklist-content h4 {
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+            color: var(--color-text);
+        }
+
+        .checklist-content p {
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+            margin: 0;
+        }
+
+        /* Button */
+        .btn {
+            display: inline-block;
+            padding: var(--space-sm) var(--space-md);
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: var(--color-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background-color: var(--color-secondary);
+        }
+
+        .btn-secondary:hover {
+            background-color: #388E3C;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--color-primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+            border: none;
+            font-size: 24px;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--color-primary-dark);
+            transform: translateY(-5px);
+        }
+
+        /* CRAAP Test */
+        .craap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-md);
+            margin: var(--space-md) 0;
+        }
+
+        .craap-item {
+            background-color: var(--color-surface);
+            border: 2px solid var(--color-primary);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            text-align: center;
+        }
+
+        .craap-letter {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .craap-word {
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+            color: var(--color-text);
+        }
+
+        .craap-question {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+
+        /* List Styles */
+        .styled-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .styled-list li {
+            padding: var(--space-sm) 0;
+            padding-left: var(--space-md);
+            position: relative;
+        }
+
+        .styled-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--color-success);
+            font-weight: 700;
+        }
+
+        /* Final Messages */
+        .message-box {
+            background: linear-gradient(135deg, var(--color-secondary) 0%, #388E3C 100%);
+            color: white;
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            margin: var(--space-md) 0;
+        }
+
+        .message-box h3 {
+            margin-bottom: var(--space-md);
+            font-size: var(--font-size-xl);
+        }
+
+        .message-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .message-box li {
+            padding: var(--space-sm) 0;
+            padding-left: var(--space-md);
+            position: relative;
+            font-size: var(--font-size-base);
+            line-height: 1.8;
+        }
+
+        .message-box li:before {
+            content: "💡";
+            position: absolute;
+            left: 0;
+        }
+
+        /* Quote */
+        .quote-box {
+            background-color: #F0F4FF;
+            border-left: 4px solid var(--color-info);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            margin: var(--space-md) 0;
+            font-style: italic;
+            position: relative;
+        }
+
+        .quote-box:before {
+            content: '"';
+            font-size: 60px;
+            color: var(--color-primary);
+            opacity: 0.3;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+        }
+
+        .quote-text {
+            font-size: var(--font-size-base);
+            line-height: 1.8;
+            color: var(--color-text);
+            padding-left: var(--space-md);
+        }
+
+        .quote-author {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            margin-top: var(--space-sm);
+            text-align: right;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                font-size: var(--font-size-sm);
+            }
+
+            .hero h1 {
+                font-size: var(--font-size-xl);
+            }
+
+            .section-title {
+                font-size: var(--font-size-xl);
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-box {
+                grid-template-columns: 1fr;
+            }
+
+            .craap-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .nav,
+            .back-to-top {
+                display: none;
+            }
+
+            .main-content {
+                margin-top: 0;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-title">Da Informação ao Conhecimento</div>
+            <ul class="nav-menu">
+                <li><a href="#intro">Introdução</a></li>
+                <li><a href="#conceitos">Conceitos Base</a></li>
+                <li><a href="#porque">Porquê É Importante</a></li>
+                <li><a href="#big6">Modelo Big6</a></li>
+                <li><a href="#estrategias">Estratégias</a></li>
+                <li><a href="#pensamento">Pensamento Crítico</a></li>
+                <li><a href="#atividades">Atividades</a></li>
+                <li><a href="#escola">Papel da Escola</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+
+            <!-- Hero Section -->
+            <section id="intro" class="hero">
+                <h1>Da Informação ao Conhecimento</h1>
+                <p>Aprende a transformar informação em conhecimento verdadeiro</p>
+            </section>
+
+            <!-- Introduction -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Porquê Aprender Isto?</h2>
+                </div>
+                <p style="font-size: var(--font-size-lg); margin-bottom: var(--space-md);">Vivemos na <strong>Era da Informação</strong>. Todos os dias somos bombardeados com milhares de informações: nas redes sociais, na televisão, nos livros, na internet. Mas ter acesso a muita informação não significa que saibamos realmente sobre os temas.</p>
+                <p style="font-size: var(--font-size-lg); margin-bottom: var(--space-md);"><strong>A grande questão é:</strong> Como é que transformas toda essa informação em conhecimento verdadeiro? Como é que aprendes de forma profunda e não apenas memorizas factos?</p>
+                
+                <h3 style="margin: var(--space-lg) 0 var(--space-md) 0; color: var(--color-primary);">A Analogia do Bolo 🍰</h3>
+                <p style="margin-bottom: var(--space-md);">Imagina que queres fazer um bolo. Podes ter três níveis diferentes de relação com o bolo:</p>
+                
+                <div class="comparison-box">
+                    <div class="comparison-item">
+                        <h3>📊 Dados</h3>
+                        <p><strong>Ingredientes separados</strong></p>
+                        <p>200g de farinha, 3 ovos, 150g de açúcar, 100ml de leite...</p>
+                        <p style="margin-top: var(--space-sm); font-style: italic; color: var(--color-text-secondary);">São factos brutos, sem contexto. Não sabes o que fazer com eles.</p>
+                    </div>
+                    <div class="comparison-item">
+                        <h3>📄 Informação</h3>
+                        <p><strong>Receita completa</strong></p>
+                        <p>Uma receita que te diz os ingredientes e os passos para fazer o bolo.</p>
+                        <p style="margin-top: var(--space-sm); font-style: italic; color: var(--color-text-secondary);">Os dados estão organizados e têm significado. Podes seguir instruções.</p>
+                    </div>
+                    <div class="comparison-item">
+                        <h3>🧠 Conhecimento</h3>
+                        <p><strong>Saber fazer bolos</strong></p>
+                        <p>Já fizeste bolos várias vezes. Compreendes porquê cada ingrediente é importante e podes criar as tuas próprias variações.</p>
+                        <p style="margin-top: var(--space-sm); font-style: italic; color: var(--color-text-secondary);">Tens compreensão profunda e experiência. Podes aplicar e adaptar.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Conceitos Base -->
+            <section id="conceitos" class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Conceitos Base</h2>
+                    <p class="section-subtitle">Compreende a diferença entre Dados, Informação e Conhecimento</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon">📊</div>
+                        <h3 class="card-title">Dados</h3>
+                        <p class="card-text">Factos brutos sem contexto. Números, palavras, datas isoladas.</p>
+                        <p class="card-text" style="margin-top: var(--space-sm); font-weight: 600;">Exemplo:</p>
+                        <p class="card-text">1500, Cabral, Brasil, nau</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">📄</div>
+                        <h3 class="card-title">Informação</h3>
+                        <p class="card-text">Dados organizados com significado. Contexto que te permite compreender.</p>
+                        <p class="card-text" style="margin-top: var(--space-sm); font-weight: 600;">Exemplo:</p>
+                        <p class="card-text">Em 1500, Pedro Álvares Cabral chegou ao Brasil numa nau portuguesa.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🧠</div>
+                        <h3 class="card-title">Conhecimento</h3>
+                        <p class="card-text">Compreensão profunda obtida através da experiência, reflexão e aplicação.</p>
+                        <p class="card-text" style="margin-top: var(--space-sm); font-weight: 600;">Exemplo:</p>
+                        <p class="card-text">Compreender o contexto dos Descobrimentos, as causas, as consequências, e saber relacionar com outros acontecimentos históricos.</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    💡 <strong>Frase-chave:</strong> A informação está fora de ti (nos livros, na internet), o conhecimento está dentro de ti (na tua compreensão e experiência).
+                </div>
+            </section>
+
+            <!-- Porquê É Importante -->
+            <section id="porque" class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Porquê É Isto Importante?</h2>
+                    <p class="section-subtitle">Quatro razões fundamentais para desenvolveres esta competência</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon">🤔</div>
+                        <h3 class="card-title">Pensamento Crítico</h3>
+                        <p class="card-text">Aprendes a <strong>questionar</strong> e a <strong>avaliar</strong> a informação que recebes. Não aceitas tudo cegamente.</p>
+                        <p class="card-text" style="margin-top: var(--space-sm); border-top: 1px solid var(--color-border); padding-top: var(--space-sm);"><strong>Exemplo prático:</strong> Quando vês uma notícia nas redes sociais, não a partilhas logo. Primeiro verificas a fonte, a data, e se é mesmo verdade.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🎓</div>
+                        <h3 class="card-title">Aprendizagem Autónoma</h3>
+                        <p class="card-text">Tornas-te um <strong>agente ativo</strong> da tua aprendizagem. Não dependes apenas do professor para aprender.</p>
+                        <p class="card-text" style="margin-top: var(--space-sm); border-top: 1px solid var(--color-border); padding-top: var(--space-sm);"><strong>Exemplo prático:</strong> Quando tens dúvidas sobre um tema, sabes como pesquisar, selecionar boas fontes e construir o teu próprio conhecimento.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🛡️</div>
+                        <h3 class="card-title">Combater a Desinformação</h3>
+                        <p class="card-text">Identificas <strong>notícias falsas</strong> e informação manipulada. Proteges-te de ser enganado.</p>
+                        <p class="card-text" style="margin-top: var(--space-sm); border-top: 1px solid var(--color-border); padding-top: var(--space-sm);"><strong>Exemplo prático:</strong> Reconheces quando um título é sensacionalista, quando uma imagem foi manipulada, ou quando uma fonte não é credível.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🚀</div>
+                        <h3 class="card-title">Preparação para o Futuro</h3>
+                        <p class="card-text">Desenvolves a capacidade de <strong>aprender ao longo da vida</strong>, essencial no mundo atual.</p>
+                        <p class="card-text" style="margin-top: var(--space-sm); border-top: 1px solid var(--color-border); padding-top: var(--space-sm);"><strong>Exemplo prático:</strong> As profissões do futuro ainda não existem. Precisas de saber aprender constantemente coisas novas, não apenas memorizar factos.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Modelo Big6 -->
+            <section id="big6" class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Modelo Big6: Os 6 Passos para Transformar Informação em Conhecimento</h2>
+                    <p class="section-subtitle">Um método prático e completo usado em escolas de todo o mundo</p>
+                </div>
+
+                <p style="font-size: var(--font-size-lg); margin-bottom: var(--space-lg);">O <strong>Modelo Big6</strong> é uma estratégia que te ajuda a resolver problemas de informação de forma organizada. Cada vez que tens um trabalho escolar, uma pesquisa ou uma dúvida, podes seguir estes 6 passos. Clica em cada passo para saber mais!</p>
+
+                <div class="accordion">
+                    <!-- Passo 1 -->
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <div class="accordion-title-wrapper">
+                                <span class="accordion-number">1</span>
+                                <span class="accordion-emoji">🎯</span>
+                                <span class="accordion-title">Definição da Tarefa</span>
+                            </div>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <div class="accordion-section">
+                                    <h4>O que é este passo?</h4>
+                                    <p>Perceber claramente o que tens de fazer e que informação precisas para completar a tarefa.</p>
+                                </div>
+                                <div class="accordion-section">
+                                    <h4>Porquê é importante?</h4>
+                                    <p>Se não sabes exatamente o que procuras, vais perder-te na imensidão de informação disponível. É como começar uma viagem sem saber o destino!</p>
+                                </div>
+                                <div class="accordion-section">
+                                    <h4>Como fazer? Questiona-te:</h4>
+                                    <ul>
+                                        <li>Que trabalho me foi pedido exatamente?</li>
+                                        <li>O que já sei sobre este tema?</li>
+                                        <li>O que preciso de saber?</li>
+                                        <li>Que perguntas quero responder?</li>
+                                        <li>Qual é o objetivo final do trabalho?</li>
+                                    </ul>
+                                </div>
+                                <div class="example-box">
+                                    <h4 style="color: var(--color-info); margin-bottom: var(--space-xs);">📝 Exemplo prático: Gil Vicente</h4>
+                                    <p><strong>Trabalho:</strong> Fazer uma apresentação sobre Gil Vicente.</p>
+                                    <p><strong>O que já sei:</strong> Foi um dramaturgo português.</p>
+                                    <p><strong>O que preciso de saber:</strong> Quando viveu? Que obras escreveu? Porquê é importante na literatura portuguesa? Quais as características do seu teatro?</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Passo 2 -->
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <div class="accordion-title-wrapper">
+                                <span class="accordion-number">2</span>
+                                <span class="accordion-emoji">🔍</span>
+                                <span class="accordion-title">Estratégias de Pesquisa</span>
+                            </div>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <div class="accordion-section">
+                                    <h4>O que é este passo?</h4>
+                                    <p>Decidir onde e como vais procurar a informação de que precisas.</p>
+                                </div>
+                                <div class="accordion-section">
+                                    <h4>Porquê é importante?</h4>
+                                    <p>Há muitas fontes de informação disponíveis. Tens de escolher as melhores e mais credíveis para não perderes tempo com informação de má qualidade.</p>
+                                </div>
+                                <div class="accordion-section">
+                                    <h4>Como fazer? Questiona-te:</h4>
+                                    <ul>
+                                        <li>Que fontes posso usar? (livros, enciclopédias, internet, revistas, entrevistas, biblioteca)</li>
+                                        <li>Que palavras-chave vou usar na pesquisa?</li>
+                                        <li>Que fontes são mais credíveis para este tema?</li>
+                                        <li>Onde posso encontrar informação de qualidade?</li>
+                                        <li>Devo pedir ajuda ao professor ou ao bibliotecário?</li>
+                                    </ul>
+                                </div>
+                                <div class="example-box">
+                                    <h4 style="color: var(--color-info); margin-bottom: var(--space-xs);">📝 Exemplo prático: Gil Vicente</h4>
+                                    <p><strong>Fontes escolhidas:</strong> Enciclopédias na biblioteca escolar, sites de museus e universidades portuguesas, manual de Português, dicionários literários.</p>
+                                    <p><strong>Palavras-chave:</strong> "Gil Vicente", "teatro português séc. XVI", "Auto da Barca", "dramaturgo português".</p>
+                                    <p><strong>Estratégia:</strong> Começar pela biblioteca escolar, depois pesquisar online em sites credíveis (.edu, .gov, museus).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Passo 3 -->
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <div class="accordion-title-wrapper">
+                                <span class="accordion-number">3</span>
+                                <span class="accordion-emoji">📚</span>
+                                <span class="accordion-title">Localização e Acesso</span>
+                            </div>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <div class="accordion-section">
+                                    <h4>O que é este passo?</h4>
+                                    <p>Encontrar e aceder efetivamente às fontes de informação que identificaste.</p>
+                                </div>
+                                <div class="accordion-section">
+                                    <h4>Porquê é importante?</h4>
+                                    <p>Saber onde procurar poupa tempo e dá-te acesso a melhores resultados. Não basta saber que existem boas fontes, tens de saber encontrá-las!</p>
+                                </div>
+                                <div class="accordion-section">
+                                    <h4>Como fazer? Ações práticas:</h4>
+                                    <ul>
+                                        <li>Ir à biblioteca escolar ou municipal</li>
+                                        <li>Usar motores de busca na internet (Google, Bing) de forma eficaz</li>
+                                        <li>Consultar o catálogo online da biblioteca</li>
+                                        <li>Pedir ajuda ao professor ou bibliotecário quando necessário</li>
+                                        <li>Registar sempre onde encontraste cada informação (URL, livro, página)</li>
+                                        <li>Guardar cópias ou tirar notas das fontes importantes</li>
+                                    </ul>
+                                </div>
+                                <div class="example-box">
+                                    <h4 style="color: var(--color-info); margin-bottom: var(--space-xs);">📝 Exemplo prático: Gil Vicente</h4>
+                                    <p><strong>O que fiz:</strong> Fui à biblioteca escolar e encontrei um livro sobre teatro português (cota: 869 VIC). Pesquisei online e encontrei dois sites confiáveis: o site do Museu Nacional do Teatro e a Infopédia. Consultei também o manual de Português (páginas 45-52).</p>
+                                    <p><strong>Registo:</strong> Anotei todas as referências num documento para usar na bibliografia.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Passo 4 -->
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <div class="accordion-title-wrapper">
+                                <span class="accordion-number">4</span>
+                                <span class="accordion-emoji">✍️</span>
+                                <span class="accordion-title">Utilização da Informação</span>
+                            </div>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <div class="accordion-section">
+                                    <h4>O que é este passo?</h4>
+                                    <p>Ler, compreender e extrair a informação relevante das fontes que encontraste.</p>
+                                </div>
+                                <div class="accordion-section">
+                                    <h4>Porquê é importante?</h4>
+                                    <p>Nem tudo o que encontras é útil para o teu trabalho. Tens de selecionar o que é relevante e compreender profundamente, não apenas copiar texto!</p>
+                                </div>
+                                <div class="accordion-section">
+                                    <h4>Como fazer? Ações práticas:</h4>
+                                    <ul>
+                                        <li>Ler com atenção e de forma crítica</li>
+                                        <li>Sublinhar ou destacar as ideias principais</li>
+                                        <li>Tirar notas com as tuas próprias palavras (não copiar)</li>
+                                        <li>Fazer esquemas, mapas mentais ou tabelas</li>
+                                        <li>Distinguir factos de opiniões</li>
+                                        <li>Registar sempre as fontes (autor, título, data, página)</li>
+                                        <li>Fazer perguntas ao texto: concordo? Há contradições? Faz sentido?</li>
+                                    </ul>
+                                </div>
+                                <div class="example-box">
+                                    <h4 style="color: var(--color-info); margin-bottom: var(--color-info); margin-bottom: var(--space-xs);">📝 Exemplo prático: Gil Vicente</h4>
+                                    <p><strong>O que fiz:</strong> Li três textos sobre Gil Vicente. Sublinhei as datas importantes (nascimento, obras principais), as características do seu teatro (crítica social, uso de várias línguas, personagens tipo), e a sua importância histórica.</p>
+                                    <p><strong>Organização:</strong> Fiz um esquema com três colunas: Vida | Obra | Importância. Anotei as informações principais com as minhas palavras e registei sempre de que fonte veio cada informação.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Passo 5 -->
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <div class="accordion-title-wrapper">
+                                <span class="accordion-number">5</span>
+                                <span class="accordion-emoji">🎨</span>
+                                <span class="accordion-title">Síntese</span>
+                            </div>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <div class="accordion-section">
+                                    <h4>O que é este passo?</h4>
+                                    <p>Organizar toda a informação recolhida e criar o teu produto final (trabalho, apresentação, texto).</p>
+                                </div>
+                                <div class="accordion-section">
+                                    <h4>Porquê é importante?</h4>
+                                    <p>É aqui que transformas informação em conhecimento pessoal! Não basta juntar informação, tens de a integrar, compreender e comunicar de forma própria.</p>
+                                </div>
+                                <div class="accordion-section">
+                                    <h4>Como fazer? Ações práticas:</h4>
+                                    <ul>
+                                        <li>Organizar a informação de forma lógica (introdução, desenvolvimento, conclusão)</li>
+                                        <li>Escrever com as tuas próprias palavras - evitar plágio!</li>
+                                        <li>Citar as fontes quando usas frases ou ideias de outros</li>
+                                        <li>Criar ligações entre diferentes informações que encontraste</li>
+                                        <li>Adicionar as tuas reflexões, opiniões e conclusões pessoais</li>
+                                        <li>Escolher o formato mais adequado: texto, apresentação, vídeo, cartaz, podcast...</li>
+                                        <li>Rever e melhorar o teu trabalho</li>
+                                    </ul>
+                                </div>
+                                <div class="example-box">
+                                    <h4 style="color: var(--color-info); margin-bottom: var(--space-xs);">📝 Exemplo prático: Gil Vicente</h4>
+                                    <p><strong>Estrutura da apresentação:</strong></p>
+                                    <p>1. Introdução: Quem foi Gil Vicente?</p>
+                                    <p>2. Vida: Contexto histórico (séc. XV-XVI)</p>
+                                    <p>3. Obra: Principais peças (Auto da Barca do Inferno, Farsa de Inês Pereira)</p>
+                                    <p>4. Características: Crítica social, humor, linguagem</p>
+                                    <p>5. Importância: Pai do teatro português</p>
+                                    <p>6. Conclusão pessoal: Porque Gil Vicente ainda é importante hoje - a crítica social continua atual!</p>
+                                    <p style="margin-top: var(--space-sm);"><strong>Tudo escrito com as minhas palavras, com citações quando necessário, e com a minha opinião fundamentada.</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Passo 6 -->
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <div class="accordion-title-wrapper">
+                                <span class="accordion-number">6</span>
+                                <span class="accordion-emoji">✅</span>
+                                <span class="accordion-title">Avaliação</span>
+                            </div>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                <div class="accordion-section">
+                                    <h4>O que é este passo?</h4>
+                                    <p>Avaliar o teu trabalho final e o processo que seguiste para o fazer.</p>
+                                </div>
+                                <div class="accordion-section">
+                                    <h4>Porquê é importante?</h4>
+                                    <p>Aprender com a experiência para melhorares no futuro. A reflexão sobre o processo é tão importante como o produto final!</p>
+                                </div>
+                                <div class="accordion-section">
+                                    <h4>Como fazer? Questiona-te:</h4>
+                                    <ul>
+                                        <li>A tarefa está completa? Respondi a todas as perguntas?</li>
+                                        <li>Cumpri os objetivos iniciais?</li>
+                                        <li>A informação que encontrei era boa e credível?</li>
+                                        <li>O que aprendi realmente sobre o tema?</li>
+                                        <li>O que aprendi sobre o processo de pesquisa?</li>
+                                        <li>O que faria diferente da próxima vez?</li>
+                                        <li>Geri bem o tempo? Comecei com antecedência suficiente?</li>
+                                        <li>Pedi ajuda quando precisei?</li>
+                                        <li>Estou satisfeito com o resultado?</li>
+                                    </ul>
+                                </div>
+                                <div class="example-box">
+                                    <h4 style="color: var(--color-info); margin-bottom: var(--space-xs);">📝 Exemplo prático: Gil Vicente</h4>
+                                    <p><strong>Autoavaliação:</strong></p>
+                                    <p>✓ Sim, completei a apresentação e respondi às questões que tinha identificado.</p>
+                                    <p>✓ Aprendi muito sobre Gil Vicente e sobre o contexto histórico do séc. XVI.</p>
+                                    <p>✓ As fontes que usei eram credíveis e de qualidade.</p>
+                                    <p>✗ Podia ter gerido melhor o tempo - comecei um pouco tarde.</p>
+                                    <p>✓ Da próxima vez, vou começar mais cedo para ter mais tempo para rever e melhorar.</p>
+                                    <p>✓ Aprendi que fazer esquemas me ajuda muito a organizar a informação!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Estratégias Práticas -->
+            <section id="estrategias" class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Estratégias Práticas para Construir Conhecimento</h2>
+                    <p class="section-subtitle">Seis estratégias essenciais que podes aplicar em qualquer situação de aprendizagem</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon">❓</div>
+                        <h3 class="card-title">Questionar</h3>
+                        <p class="card-text">Fazer perguntas é a base do conhecimento. Nunca aceites informação passivamente!</p>
+                        <ul style="margin-top: var(--space-sm); padding-left: var(--space-md); color: var(--color-text-secondary);">
+                            <li>Porquê isto acontece?</li>
+                            <li>Como funciona?</li>
+                            <li>Quem diz isto?</li>
+                            <li>Com que provas?</li>
+                            <li>Há outras explicações?</li>
+                            <li>E se fosse diferente?</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🔗</div>
+                        <h3 class="card-title">Relacionar</h3>
+                        <p class="card-text">Ligar novas informações com o que já sabes. O conhecimento é uma rede de ligações!</p>
+                        <ul style="margin-top: var(--space-sm); padding-left: var(--space-md); color: var(--color-text-secondary);">
+                            <li>O que já sei sobre isto?</li>
+                            <li>Como se relaciona com outros temas?</li>
+                            <li>Isto confirma ou contradiz o que sabia?</li>
+                            <li>Que padrões vejo?</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🛠️</div>
+                        <h3 class="card-title">Aplicar</h3>
+                        <p class="card-text">Usar a informação em situações práticas. O conhecimento que não é aplicado esquece-se!</p>
+                        <ul style="margin-top: var(--space-sm); padding-left: var(--space-md); color: var(--color-text-secondary);">
+                            <li>Como posso usar isto?</li>
+                            <li>Que problema isto resolve?</li>
+                            <li>Onde vejo isto no mundo real?</li>
+                            <li>Como explico isto a alguém?</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">💭</div>
+                        <h3 class="card-title">Refletir</h3>
+                        <p class="card-text">Pensar sobre o que aprendeste. A reflexão transforma informação em conhecimento profundo.</p>
+                        <ul style="margin-top: var(--space-sm); padding-left: var(--space-md); color: var(--color-text-secondary);">
+                            <li>O que aprendi realmente?</li>
+                            <li>Isto mudou o que pensava?</li>
+                            <li>Que novas questões surgem?</li>
+                            <li>Como me sinto sobre isto?</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🔬</div>
+                        <h3 class="card-title">Avaliar Fontes</h3>
+                        <p class="card-text">Verificar se a informação é credível e confiável. Nem tudo o que lês é verdade!</p>
+                        <ul style="margin-top: var(--space-sm); padding-left: var(--space-md); color: var(--color-text-secondary);">
+                            <li>Quem é o autor? É especialista?</li>
+                            <li>A fonte é confiável?</li>
+                            <li>A informação é atual?</li>
+                            <li>Há dados que apoiam as afirmações?</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">📝</div>
+                        <h3 class="card-title">Sintetizar</h3>
+                        <p class="card-text">Resumir e reorganizar com as tuas próprias palavras. Se não consegues explicar, ainda não compreendeste!</p>
+                        <ul style="margin-top: var(--space-sm); padding-left: var(--space-md); color: var(--color-text-secondary);">
+                            <li>Qual é a ideia principal?</li>
+                            <li>Como explico isto a alguém?</li>
+                            <li>Que conclusões tiro?</li>
+                            <li>Como resumo em poucas palavras?</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pensamento Crítico -->
+            <section id="pensamento" class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Pensamento Crítico: Facto vs Opinião</h2>
+                    <p class="section-subtitle">Aprende a distinguir informação objetiva de interpretações pessoais</p>
+                </div>
+
+                <p style="font-size: var(--font-size-lg); margin-bottom: var(--space-lg);">Uma das competências mais importantes do pensamento crítico é saber distinguir <strong>factos</strong> de <strong>opiniões</strong>. Esta distinção é fundamental para avaliar a qualidade da informação.</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Aspeto</th>
+                            <th>Facto</th>
+                            <th>Opinião</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Definição</strong></td>
+                            <td>Afirmação que pode ser verificada e provada</td>
+                            <td>Ponto de vista pessoal ou interpretação</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Natureza</strong></td>
+                            <td>Objetivo</td>
+                            <td>Subjetivo</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Base</strong></td>
+                            <td>Baseado em dados e evidências</td>
+                            <td>Baseado em crenças, preferências ou valores</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Verificação</strong></td>
+                            <td>Pode ser verificado por qualquer pessoa</td>
+                            <td>Varia de pessoa para pessoa</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 style="margin: var(--space-lg) 0 var(--space-md) 0; color: var(--color-primary); font-size: var(--font-size-xl);">Exemplos</h3>
+
+                <div class="comparison-box">
+                    <div class="comparison-item">
+                        <h3>✓ Factos</h3>
+                        <ul style="padding-left: var(--space-md);">
+                            <li>Portugal tem aproximadamente 10,3 milhões de habitantes</li>
+                            <li>A água ferve aos 100°C ao nível do mar</li>
+                            <li>Os Lusíadas têm 10 cantos</li>
+                            <li>Fernando Pessoa nasceu em 1888</li>
+                            <li>Lisboa é a capital de Portugal</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-item">
+                        <h3>💭 Opiniões</h3>
+                        <ul style="padding-left: var(--space-md);">
+                            <li>Portugal é o melhor país do mundo</li>
+                            <li>O chocolate é mais saboroso que baunilha</li>
+                            <li>Os Lusíadas são aborrecidos</li>
+                            <li>Fernando Pessoa é o melhor poeta português</li>
+                            <li>Lisboa é a cidade mais bonita da Europa</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 style="margin: var(--space-lg) 0 var(--space-md) 0; color: var(--color-primary); font-size: var(--font-size-xl);">Teste CRAAP: Avaliar Fontes Online</h3>
+                <p style="margin-bottom: var(--space-md);">Quando pesquisas informação online, usa o <strong>Teste CRAAP</strong> para avaliar se uma fonte é credível:</p>
+
+                <div class="craap-grid">
+                    <div class="craap-item">
+                        <div class="craap-letter">C</div>
+                        <div class="craap-word">Currency</div>
+                        <div class="craap-word">(Atualidade)</div>
+                        <div class="craap-question">A informação é atual e está atualizada?</div>
+                    </div>
+                    <div class="craap-item">
+                        <div class="craap-letter">R</div>
+                        <div class="craap-word">Relevance</div>
+                        <div class="craap-word">(Relevância)</div>
+                        <div class="craap-question">É relevante para o meu trabalho ou pesquisa?</div>
+                    </div>
+                    <div class="craap-item">
+                        <div class="craap-letter">A</div>
+                        <div class="craap-word">Authority</div>
+                        <div class="craap-word">(Autoridade)</div>
+                        <div class="craap-question">O autor é especialista no assunto?</div>
+                    </div>
+                    <div class="craap-item">
+                        <div class="craap-letter">A</div>
+                        <div class="craap-word">Accuracy</div>
+                        <div class="craap-word">(Precisão)</div>
+                        <div class="craap-question">A informação é precisa e tem evidências?</div>
+                    </div>
+                    <div class="craap-item">
+                        <div class="craap-letter">P</div>
+                        <div class="craap-word">Purpose</div>
+                        <div class="craap-word">(Propósito)</div>
+                        <div class="craap-question">Qual é o objetivo: informar, persuadir ou vender?</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Atividades Interativas -->
+            <section id="atividades" class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Atividades Práticas</h2>
+                    <p class="section-subtitle">Testa e aplica o que aprendeste!</p>
+                </div>
+
+                <!-- Quiz -->
+                <h3 style="margin: var(--space-md) 0; color: var(--color-primary); font-size: var(--font-size-xl);">Atividade 1: Quiz "Facto ou Opinião?"</h3>
+                <p style="margin-bottom: var(--space-md);">Para cada afirmação, decide se é um <strong>facto</strong> (pode ser verificado) ou uma <strong>opinião</strong> (ponto de vista pessoal).</p>
+
+                <div class="quiz-container" id="quiz-container">
+                    <!-- Quiz items will be generated by JavaScript -->
+                </div>
+
+                <div style="text-align: center; margin-top: var(--space-lg);">
+                    <button class="btn" onclick="resetQuiz()">🔄 Reiniciar Quiz</button>
+                </div>
+
+                <!-- Checklist -->
+                <h3 style="margin: var(--space-xl) 0 var(--space-md) 0; color: var(--color-primary); font-size: var(--font-size-xl);">Atividade 2: Checklist Prática Big6</h3>
+                <p style="margin-bottom: var(--space-md);">Usa esta checklist quando fizeres um trabalho de pesquisa. Segue os 6 passos do modelo Big6!</p>
+
+                <div style="background-color: #E3F2FD; padding: var(--space-md); border-radius: var(--radius-md); margin-bottom: var(--space-md);">
+                    <h4 style="color: var(--color-primary); margin-bottom: var(--space-xs);">📚 Tema exemplo: Os Descobrimentos Portugueses</h4>
+                    <p style="margin: 0;">Usa este tema como exemplo ou aplica ao teu próprio trabalho escolar!</p>
+                </div>
+
+                <div class="checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check1">
+                        <div class="checklist-content">
+                            <h4>🎯 Passo 1: Definição da Tarefa</h4>
+                            <p>Defini claramente o que tenho de fazer e que informação preciso. Identifiquei as perguntas principais a responder.</p>
+                        </div>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check2">
+                        <div class="checklist-content">
+                            <h4>🔍 Passo 2: Estratégias de Pesquisa</h4>
+                            <p>Decidi onde vou pesquisar (biblioteca, internet, livros) e que palavras-chave vou usar. Identifiquei fontes credíveis.</p>
+                        </div>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check3">
+                        <div class="checklist-content">
+                            <h4>📚 Passo 3: Localização e Acesso</h4>
+                            <p>Encontrei e acedi às fontes de informação. Registei onde encontrei cada informação para a bibliografia.</p>
+                        </div>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check4">
+                        <div class="checklist-content">
+                            <h4>✍️ Passo 4: Utilização da Informação</h4>
+                            <p>Li criticamente, sublinhei ideias principais, tirei notas com as minhas palavras. Distingui factos de opiniões.</p>
+                        </div>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check5">
+                        <div class="checklist-content">
+                            <h4>🎨 Passo 5: Síntese</h4>
+                            <p>Organizei a informação de forma lógica, escrevi com as minhas palavras, citei fontes, adicionei reflexões pessoais.</p>
+                        </div>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="check6">
+                        <div class="checklist-content">
+                            <h4>✅ Passo 6: Avaliação</h4>
+                            <p>Avaliei o meu trabalho e o processo. Refleti sobre o que aprendi e o que faria diferente da próxima vez.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: var(--space-md);">
+                    <button class="btn btn-secondary" onclick="window.print()">🖨️ Imprimir Checklist</button>
+                </div>
+            </section>
+
+            <!-- Papel da Escola e Biblioteca -->
+            <section id="escola" class="section">
+                <div class="section-header">
+                    <h2 class="section-title">O Papel da Escola e da Biblioteca</h2>
+                    <p class="section-subtitle">Como a escola te ajuda a transformar informação em conhecimento</p>
+                </div>
+
+                <p style="font-size: var(--font-size-lg); margin-bottom: var(--space-lg);">A missão da <strong>escola</strong> não é apenas transmitir conteúdos, mas ensinar-te a aprender. A <strong>biblioteca escolar</strong> tem um papel fundamental neste processo!</p>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon">👨‍🏫</div>
+                        <h3 class="card-title">O Professor</h3>
+                        <p class="card-text">Transmite conteúdos, orienta, ajuda a definir problemas de aprendizagem e ensina estratégias para aprender.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">📚</div>
+                        <h3 class="card-title">A Biblioteca Escolar</h3>
+                        <p class="card-text">Fornece recursos variados, ensina literacia da informação, apoia a pesquisa e ajuda a desenvolver pensamento crítico.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🎓</div>
+                        <h3 class="card-title">Tu, o Aluno</h3>
+                        <p class="card-text">És o agente ativo da tua aprendizagem. Com o apoio do professor e da biblioteca, constróis o teu conhecimento.</p>
+                    </div>
+                </div>
+
+                <div class="quote-box" style="margin-top: var(--space-lg);">
+                    <p class="quote-text">"O professor transmite conteúdos e ajuda a definir um problema de aprendizagem - esse é o ponto de partida - a biblioteca escolar ajuda a transformar a informação em conhecimento. Ambos trabalham para o mesmo objetivo final: o conhecimento."</p>
+                    <p class="quote-author">— Ross Todd, especialista em bibliotecas escolares</p>
+                </div>
+
+                <h3 style="margin: var(--space-lg) 0 var(--space-md) 0; color: var(--color-primary); font-size: var(--font-size-xl);">Como a Biblioteca Escolar Te Ajuda</h3>
+
+                <ul class="styled-list">
+                    <li>Acesso a recursos de qualidade (livros, enciclopédias, revistas, bases de dados)</li>
+                    <li>Apoio na pesquisa e seleção de fontes credíveis</li>
+                    <li>Ensino de competências de literacia da informação</li>
+                    <li>Espaço de estudo e trabalho colaborativo</li>
+                    <li>Orientação do professor bibliotecário</li>
+                    <li>Formação em ferramentas digitais e avaliação de fontes online</li>
+                    <li>Desenvolvimento de projetos de pesquisa orientados</li>
+                </ul>
+
+                <div style="background-color: var(--color-bg-1); padding: var(--space-md); border-radius: var(--radius-md); margin-top: var(--space-md); border: 2px solid var(--color-primary);">
+                    <h4 style="color: var(--color-primary); margin-bottom: var(--space-sm);">💡 Sugestão</h4>
+                    <p style="margin: 0;">Sempre que tiveres um trabalho de pesquisa, visita a biblioteca escolar! O professor bibliotecário pode ajudar-te a encontrar as melhores fontes e a organizar a tua pesquisa. Não tenhas vergonha de pedir ajuda - essa é uma competência importante!</p>
+                </div>
+            </section>
+
+            <!-- Conclusão -->
+            <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Mensagens-Chave para Recordar</h2>
+                </div>
+
+                <div class="message-box">
+                    <h3>💡 Lembra-te sempre:</h3>
+                    <ul>
+                        <li>Ter acesso à informação é importante, mas transformá-la em conhecimento é o que te torna verdadeiramente sábio</li>
+                        <li>O conhecimento não se memoriza, constrói-se através da compreensão e da experiência</li>
+                        <li>Questionar é a base do conhecimento - nunca tenhas medo de fazer perguntas</li>
+                        <li>O pensamento crítico é a tua arma contra a desinformação</li>
+                        <li>Aprender a aprender é a competência mais importante do século XXI</li>
+                        <li>A informação está fora de ti, o conhecimento está dentro de ti</li>
+                    </ul>
+                </div>
+
+                <div style="text-align: center; margin-top: var(--space-lg); padding: var(--space-lg); background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%); color: white; border-radius: var(--radius-lg);">
+                    <h3 style="font-size: var(--font-size-xl); margin-bottom: var(--space-md); color: white;">🎓 Bom Trabalho!</h3>
+                    <p style="font-size: var(--font-size-lg); margin: 0;">Agora já sabes como transformar informação em conhecimento. Aplica estas estratégias em todos os teus trabalhos escolares e verás a diferença!</p>
+                </div>
+
+                <div style="text-align: center; margin-top: var(--space-md); color: var(--color-text-secondary); font-size: var(--font-size-sm);">
+                    <p>Aplicação desenvolvida para apoio à literacia da informação no 3.º Ciclo</p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()" aria-label="Voltar ao topo">↑</button>
+
+    <script>
+        // Quiz Data
+        const quizData = [
+            {
+                question: "Portugal fica na Europa",
+                answer: "facto",
+                explanation: "Pode ser verificado num mapa ou atlas. É um facto geográfico."
+            },
+            {
+                question: "O futebol é mais interessante que o basquetebol",
+                answer: "opiniao",
+                explanation: "Depende do gosto pessoal de cada um. Cada pessoa tem preferências diferentes."
+            },
+            {
+                question: "Fernando Pessoa escreveu 'Mensagem'",
+                answer: "facto",
+                explanation: "Pode ser confirmado em registos literários e históricos."
+            },
+            {
+                question: "A poesia de Pessoa é difícil de compreender",
+                answer: "opiniao",
+                explanation: "Varia conforme a experiência e conhecimento de cada leitor. É uma perceção pessoal."
+            },
+            {
+                question: "O aquecimento global está a aumentar a temperatura média da Terra",
+                answer: "facto",
+                explanation: "Confirmado por dados científicos e medições ao longo de décadas."
+            },
+            {
+                question: "Todos deviam ser vegetarianos",
+                answer: "opiniao",
+                explanation: "É uma posição pessoal sobre alimentação. Varia conforme valores e crenças de cada pessoa."
+            },
+            {
+                question: "Lisboa é a capital de Portugal",
+                answer: "facto",
+                explanation: "É um facto administrativo e geográfico, estabelecido oficialmente."
+            },
+            {
+                question: "As aulas de Português são as mais importantes",
+                answer: "opiniao",
+                explanation: "Cada pessoa valoriza disciplinas de forma diferente. É uma preferência pessoal."
+            }
+        ];
+
+        // Initialize Quiz
+        function initQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+            
+            quizData.forEach((item, index) => {
+                const quizItem = document.createElement('div');
+                quizItem.className = 'quiz-item';
+                quizItem.innerHTML = `
+                    <div class="quiz-question">${index + 1}. "${item.question}"</div>
+                    <div class="quiz-buttons">
+                        <button class="quiz-btn" onclick="checkAnswer(${index}, 'facto')">FACTO</button>
+                        <button class="quiz-btn" onclick="checkAnswer(${index}, 'opiniao')">OPINIÃO</button>
+                    </div>
+                    <div class="quiz-feedback" id="feedback-${index}"></div>
+                `;
+                container.appendChild(quizItem);
+            });
+        }
+
+        // Check Answer
+        function checkAnswer(index, userAnswer) {
+            const item = quizData[index];
+            const feedback = document.getElementById(`feedback-${index}`);
+            const buttons = document.querySelectorAll(`#quiz-container .quiz-item:nth-child(${index + 1}) .quiz-btn`);
+            
+            // Disable buttons
+            buttons.forEach(btn => btn.disabled = true);
+            
+            // Show feedback
+            feedback.classList.add('show');
+            if (userAnswer === item.answer) {
+                feedback.className = 'quiz-feedback show correct';
+                feedback.innerHTML = `✓ <strong>Correto!</strong> ${item.explanation}`;
+            } else {
+                feedback.className = 'quiz-feedback show incorrect';
+                feedback.innerHTML = `✗ <strong>Incorreto.</strong> Esta é uma ${item.answer === 'facto' ? 'FACTO' : 'OPINIÃO'}. ${item.explanation}`;
+            }
+        }
+
+        // Reset Quiz
+        function resetQuiz() {
+            initQuiz();
+            window.scrollTo({
+                top: document.getElementById('atividades').offsetTop - 150,
+                behavior: 'smooth'
+            });
+        }
+
+        // Accordion Toggle
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.accordion-icon');
+            
+            // Toggle active class
+            header.classList.toggle('active');
+            content.classList.toggle('active');
+            icon.classList.toggle('active');
+        }
+
+        // Back to Top Button
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Show/Hide Back to Top Button
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('.nav-menu a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                const navHeight = document.querySelector('.nav').offsetHeight;
+                const targetPosition = targetElement.offsetTop - navHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initQuiz();
+        });
+    </script>
+
+</body>
+</html>
