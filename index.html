@@ -764,6 +764,12 @@
             .section { box-shadow: none; border: 1px solid #bbb; }
             .accordion-content { max-height: none !important; }
         }
+
+        .nav-brand-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: var(--space-xs); }
+        .nav-brand-row .nav-title { margin-bottom: 0; }
+        .nav-mark { display: inline-block; color: #fff; text-decoration: none; font-size: var(--font-size-sm); font-weight: 700; letter-spacing: .02em; padding: 5px 10px; border: 1px solid rgba(255,255,255,.48); border-radius: 999px; white-space: nowrap; }
+        .nav-mark:hover, .nav-mark:focus-visible { color: #102a43; background: #fff; }
+        @media (max-width: 520px) { .nav-brand-row { align-items: flex-start; flex-direction: column; gap: 4px; } }
     </style>
 </head>
 <body>
@@ -772,7 +778,7 @@
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-container">
-            <div class="nav-title">Da Informação ao Conhecimento</div>
+            <div class="nav-brand-row"><div class="nav-title">Da Informação ao Conhecimento</div><a class="nav-mark" href="https://jfborges.com/" target="_blank" rel="noopener noreferrer">TIC, Educação e WEB</a></div>
             <ul class="nav-menu">
                 <li><a href="#intro">Introdução</a></li>
                 <li><a href="#conceitos">Conceitos Base</a></li>
