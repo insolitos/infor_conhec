@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guia interativo para pesquisar, avaliar fontes e transformar informação em conhecimento. Inclui o modelo Big6, atividades e checklist.">
+    <meta name="theme-color" content="#102a43">
     <title>Da Informação ao Conhecimento: Guia Interativo</title>
     <style>
         :root {
@@ -726,9 +728,46 @@
                 page-break-inside: avoid;
             }
         }
+
+        /* Navegação acessível, adaptação móvel e impressão */
+        html { scroll-behavior: smooth; }
+        .nav { position: sticky; top: 0; background: #102a43; }
+        .nav-menu { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: thin; }
+        .nav-menu li { flex: 0 0 auto; }
+        .main-content { margin-top: 0; }
+        .skip-link { position: fixed; top: -5rem; left: 1rem; z-index: 2000; padding: .75rem 1rem; color: #102a43; background: #fff; border: 2px solid #102a43; border-radius: 8px; }
+        .skip-link:focus { top: 1rem; }
+        :focus-visible { outline: 3px solid #ffbf47; outline-offset: 3px; }
+        .accordion-header { width: 100%; border: 0; text-align: left; font: inherit; color: inherit; }
+        .progress-wrap { padding: 1rem; margin: 1rem 0; background: #eef5fb; border-radius: 8px; }
+        .progress-wrap progress { width: 100%; height: 1rem; accent-color: #1976d2; }
+        .progress-label { display: block; margin-bottom: .5rem; font-weight: 600; }
+        .quiz-summary { margin: 1rem 0; padding: 1rem; border-radius: 8px; background: #eef5fb; font-weight: 600; }
+        .brand-footer { margin: 1.5rem auto 0; text-align: center; color: #fff; }
+        .brand-footer a { color: #fff; font-weight: 700; text-decoration-thickness: 2px; }
+        .article-link { display: inline-block; margin-top: 1.25rem; color: #fff; font-weight: 700; text-underline-offset: 3px; }
+        .accordion-header:focus-visible, .quiz-btn:focus-visible, .btn:focus-visible { outline-color: #b45309; }
+        @media (max-width: 768px) {
+            .nav { padding: 10px 0; }
+            .nav-title { font-size: 1rem; margin-bottom: 6px; }
+            .nav-menu { gap: 4px; }
+            .nav-menu li a { padding: 6px 10px; white-space: nowrap; }
+            .section { padding: 20px; }
+            .quiz-buttons { flex-direction: column; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+        }
+        @media print {
+            .nav, .back-to-top, .btn, .quiz-buttons { display: none !important; }
+            .main-content { margin: 0; }
+            .section { box-shadow: none; border: 1px solid #bbb; }
+            .accordion-content { max-height: none !important; }
+        }
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
 
     <!-- Navigation -->
     <nav class="nav">
@@ -737,7 +776,7 @@
             <ul class="nav-menu">
                 <li><a href="#intro">Introdução</a></li>
                 <li><a href="#conceitos">Conceitos Base</a></li>
-                <li><a href="#porque">Porquê É Importante</a></li>
+                <li><a href="#porque">Porque é importante</a></li>
                 <li><a href="#big6">Modelo Big6</a></li>
                 <li><a href="#estrategias">Estratégias</a></li>
                 <li><a href="#pensamento">Pensamento Crítico</a></li>
@@ -748,13 +787,14 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="main-content">
+    <main class="main-content" id="conteudo">
         <div class="container">
 
             <!-- Hero Section -->
             <section id="intro" class="hero">
                 <h1>Da Informação ao Conhecimento</h1>
-                <p>Aprende a transformar informação em conhecimento verdadeiro</p>
+                <p>Pesquisa, avalia, relaciona e explica: transforma informação em compreensão fundamentada.</p>
+                <a class="article-link" href="https://jfborges.com/2025/10/26/a-app-que-ajuda-os-alunos-a-transformar-a-informacao-em-conhecimento/" target="_blank" rel="noopener noreferrer">Ler o artigo que acompanha esta aplicação ↗</a>
             </section>
 
             <!-- Introduction -->
@@ -801,7 +841,7 @@
                     <div class="card">
                         <div class="card-icon">📊</div>
                         <h3 class="card-title">Dados</h3>
-                        <p class="card-text">Factos brutos sem contexto. Números, palavras, datas isoladas.</p>
+                        <p class="card-text">Registos isolados que, sem contexto, ainda pouco nos dizem: números, palavras ou datas.</p>
                         <p class="card-text" style="margin-top: var(--space-sm); font-weight: 600;">Exemplo:</p>
                         <p class="card-text">1500, Cabral, Brasil, nau</p>
                     </div>
@@ -815,21 +855,21 @@
                     <div class="card">
                         <div class="card-icon">🧠</div>
                         <h3 class="card-title">Conhecimento</h3>
-                        <p class="card-text">Compreensão profunda obtida através da experiência, reflexão e aplicação.</p>
+                        <p class="card-text">Interpretação e compreensão construídas ao relacionar informação com conhecimentos prévios, reflexão e aplicação. O modelo é uma forma útil de pensar, não uma sequência automática.</p>
                         <p class="card-text" style="margin-top: var(--space-sm); font-weight: 600;">Exemplo:</p>
                         <p class="card-text">Compreender o contexto dos Descobrimentos, as causas, as consequências, e saber relacionar com outros acontecimentos históricos.</p>
                     </div>
                 </div>
 
                 <div class="highlight-box">
-                    💡 <strong>Frase-chave:</strong> A informação está fora de ti (nos livros, na internet), o conhecimento está dentro de ti (na tua compreensão e experiência).
+                    💡 <strong>Frase-chave:</strong> Uma frase para recordar: encontrar informação é o início; compreender, avaliar e conseguir explicar com as tuas palavras é parte do trabalho de construir conhecimento.
                 </div>
             </section>
 
             <!-- Porquê É Importante -->
             <section id="porque" class="section">
                 <div class="section-header">
-                    <h2 class="section-title">Porquê É Isto Importante?</h2>
+                    <h2 class="section-title">Porque é que isto é importante?</h2>
                     <p class="section-subtitle">Quatro razões fundamentais para desenvolveres esta competência</p>
                 </div>
 
@@ -873,14 +913,14 @@
                 <div class="accordion">
                     <!-- Passo 1 -->
                     <div class="accordion-item">
-                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <button type="button" class="accordion-header" aria-expanded="false" onclick="toggleAccordion(this)">
                             <div class="accordion-title-wrapper">
                                 <span class="accordion-number">1</span>
                                 <span class="accordion-emoji">🎯</span>
                                 <span class="accordion-title">Definição da Tarefa</span>
                             </div>
                             <span class="accordion-icon">▼</span>
-                        </div>
+                        </button></div>
                         <div class="accordion-content">
                             <div class="accordion-body">
                                 <div class="accordion-section">
@@ -920,7 +960,7 @@
                                 <span class="accordion-title">Estratégias de Pesquisa</span>
                             </div>
                             <span class="accordion-icon">▼</span>
-                        </div>
+                        </button></div>
                         <div class="accordion-content">
                             <div class="accordion-body">
                                 <div class="accordion-section">
@@ -960,7 +1000,7 @@
                                 <span class="accordion-title">Localização e Acesso</span>
                             </div>
                             <span class="accordion-icon">▼</span>
-                        </div>
+                        </button></div>
                         <div class="accordion-content">
                             <div class="accordion-body">
                                 <div class="accordion-section">
@@ -1000,7 +1040,7 @@
                                 <span class="accordion-title">Utilização da Informação</span>
                             </div>
                             <span class="accordion-icon">▼</span>
-                        </div>
+                        </button></div>
                         <div class="accordion-content">
                             <div class="accordion-body">
                                 <div class="accordion-section">
@@ -1041,7 +1081,7 @@
                                 <span class="accordion-title">Síntese</span>
                             </div>
                             <span class="accordion-icon">▼</span>
-                        </div>
+                        </button></div>
                         <div class="accordion-content">
                             <div class="accordion-body">
                                 <div class="accordion-section">
@@ -1088,7 +1128,7 @@
                                 <span class="accordion-title">Avaliação</span>
                             </div>
                             <span class="accordion-icon">▼</span>
-                        </div>
+                        </button></div>
                         <div class="accordion-content">
                             <div class="accordion-body">
                                 <div class="accordion-section">
@@ -1215,7 +1255,7 @@
                     <p class="section-subtitle">Aprende a distinguir informação objetiva de interpretações pessoais</p>
                 </div>
 
-                <p style="font-size: var(--font-size-lg); margin-bottom: var(--space-lg);">Uma das competências mais importantes do pensamento crítico é saber distinguir <strong>factos</strong> de <strong>opiniões</strong>. Esta distinção é fundamental para avaliar a qualidade da informação.</p>
+                <p style="font-size: var(--font-size-lg); margin-bottom: var(--space-lg);">Uma das competências mais importantes do pensamento crítico é saber distinguir <strong>factos</strong> de <strong>opiniões</strong>. Esta distinção ajuda a avaliar a informação, mas algumas afirmações misturam dados, interpretações e juízos de valor. Pergunta sempre o que pode ser verificado e que evidências existem.</p>
 
                 <table class="comparison-table">
                     <thead>
@@ -1255,8 +1295,8 @@
                     <div class="comparison-item">
                         <h3>✓ Factos</h3>
                         <ul style="padding-left: var(--space-md);">
-                            <li>Portugal tem aproximadamente 10,3 milhões de habitantes</li>
-                            <li>A água ferve aos 100°C ao nível do mar</li>
+                            <li>Portugal tem uma população cujo valor depende do ano e da fonte estatística consultada</li>
+                            <li>À pressão atmosférica padrão, a água pura entra em ebulição perto dos 100 °C</li>
                             <li>Os Lusíadas têm 10 cantos</li>
                             <li>Fernando Pessoa nasceu em 1888</li>
                             <li>Lisboa é a capital de Portugal</li>
@@ -1274,39 +1314,34 @@
                     </div>
                 </div>
 
-                <h3 style="margin: var(--space-lg) 0 var(--space-md) 0; color: var(--color-primary); font-size: var(--font-size-xl);">Teste CRAAP: Avaliar Fontes Online</h3>
-                <p style="margin-bottom: var(--space-md);">Quando pesquisas informação online, usa o <strong>Teste CRAAP</strong> para avaliar se uma fonte é credível:</p>
+                <h3 style="margin: var(--space-lg) 0 var(--space-md) 0; color: var(--color-primary); font-size: var(--font-size-xl);">Cinco perguntas para avaliar uma fonte</h3>
+                <p style="margin-bottom: var(--space-md);">Quando encontrares uma fonte, faz estas cinco perguntas. A avaliação depende do tema e deve cruzar várias fontes:</p>
 
                 <div class="craap-grid">
                     <div class="craap-item">
-                        <div class="craap-letter">C</div>
-                        <div class="craap-word">Currency</div>
-                        <div class="craap-word">(Atualidade)</div>
-                        <div class="craap-question">A informação é atual e está atualizada?</div>
+                        <div class="craap-letter">1</div>
+                        <div class="craap-word">Atualidade</div>
+                        <div class="craap-question">A data é adequada ao tema? A informação ainda é válida?</div>
                     </div>
                     <div class="craap-item">
-                        <div class="craap-letter">R</div>
-                        <div class="craap-word">Relevance</div>
-                        <div class="craap-word">(Relevância)</div>
-                        <div class="craap-question">É relevante para o meu trabalho ou pesquisa?</div>
+                        <div class="craap-letter">2</div>
+                        <div class="craap-word">Relevância</div>
+                        <div class="craap-question">Esta fonte responde à pergunta e é adequada ao meu trabalho?</div>
                     </div>
                     <div class="craap-item">
-                        <div class="craap-letter">A</div>
-                        <div class="craap-word">Authority</div>
-                        <div class="craap-word">(Autoridade)</div>
-                        <div class="craap-question">O autor é especialista no assunto?</div>
+                        <div class="craap-letter">3</div>
+                        <div class="craap-word">Autoridade</div>
+                        <div class="craap-question">Quem produziu esta informação e que experiência ou instituição apresenta?</div>
                     </div>
                     <div class="craap-item">
-                        <div class="craap-letter">A</div>
-                        <div class="craap-word">Accuracy</div>
-                        <div class="craap-word">(Precisão)</div>
-                        <div class="craap-question">A informação é precisa e tem evidências?</div>
+                        <div class="craap-letter">4</div>
+                        <div class="craap-word">Evidência</div>
+                        <div class="craap-question">As afirmações são apoiadas por dados ou fontes que posso confirmar?</div>
                     </div>
                     <div class="craap-item">
-                        <div class="craap-letter">P</div>
-                        <div class="craap-word">Purpose</div>
-                        <div class="craap-word">(Propósito)</div>
-                        <div class="craap-question">Qual é o objetivo: informar, persuadir ou vender?</div>
+                        <div class="craap-letter">5</div>
+                        <div class="craap-word">Propósito</div>
+                        <div class="craap-question">O propósito é informar, persuadir, vender ou defender uma posição?</div>
                     </div>
                 </div>
             </section>
@@ -1320,8 +1355,9 @@
 
                 <!-- Quiz -->
                 <h3 style="margin: var(--space-md) 0; color: var(--color-primary); font-size: var(--font-size-xl);">Atividade 1: Quiz "Facto ou Opinião?"</h3>
-                <p style="margin-bottom: var(--space-md);">Para cada afirmação, decide se é um <strong>facto</strong> (pode ser verificado) ou uma <strong>opinião</strong> (ponto de vista pessoal).</p>
+                <p style="margin-bottom: var(--space-md);">Classifica cada afirmação como facto verificável ou opinião. Algumas podem combinar os dois: usa a explicação para perceber o que se pode confirmar e o que depende de uma avaliação pessoal.</p>
 
+                <div class="quiz-summary" id="quiz-summary" aria-live="polite">Responde às afirmações para veres a tua pontuação.</div>
                 <div class="quiz-container" id="quiz-container">
                     <!-- Quiz items will be generated by JavaScript -->
                 </div>
@@ -1339,6 +1375,11 @@
                     <p style="margin: 0;">Usa este tema como exemplo ou aplica ao teu próprio trabalho escolar!</p>
                 </div>
 
+                <div class="progress-wrap">
+                    <label class="progress-label" for="checklist-progress">Progresso da checklist</label>
+                    <progress id="checklist-progress" max="6" value="0">0%</progress>
+                    <span id="checklist-progress-text" aria-live="polite">0 de 6 passos concluídos</span>
+                </div>
                 <div class="checklist">
                     <div class="checklist-item">
                         <input type="checkbox" id="check1">
@@ -1463,7 +1504,8 @@
                 </div>
 
                 <div style="text-align: center; margin-top: var(--space-md); color: var(--color-text-secondary); font-size: var(--font-size-sm);">
-                    <p>Aplicação desenvolvida para apoio à literacia da informação no 3.º Ciclo</p>
+                    <p>Recurso de apoio à literacia da informação, adaptável a diferentes níveis de ensino.</p>
+                    <p class="brand-footer"><a href="https://jfborges.com/" target="_blank" rel="noopener noreferrer">TIC, Educação e WEB</a></p>
                 </div>
             </section>
 
@@ -1518,8 +1560,14 @@
             }
         ];
 
+        let quizScore = 0;
+        let quizAnswered = 0;
+
         // Initialize Quiz
         function initQuiz() {
+            quizScore = 0;
+            quizAnswered = 0;
+            updateQuizSummary();
             const container = document.getElementById('quiz-container');
             container.innerHTML = '';
             
@@ -1529,10 +1577,10 @@
                 quizItem.innerHTML = `
                     <div class="quiz-question">${index + 1}. "${item.question}"</div>
                     <div class="quiz-buttons">
-                        <button class="quiz-btn" onclick="checkAnswer(${index}, 'facto')">FACTO</button>
-                        <button class="quiz-btn" onclick="checkAnswer(${index}, 'opiniao')">OPINIÃO</button>
+                        <button type="button" class="quiz-btn" onclick="checkAnswer(${index}, 'facto')">Facto verificável</button>
+                        <button type="button" class="quiz-btn" onclick="checkAnswer(${index}, 'opiniao')">Opinião</button>
                     </div>
-                    <div class="quiz-feedback" id="feedback-${index}"></div>
+                    <div class="quiz-feedback" id="feedback-${index}" aria-live="polite"></div>
                 `;
                 container.appendChild(quizItem);
             });
@@ -1544,18 +1592,29 @@
             const feedback = document.getElementById(`feedback-${index}`);
             const buttons = document.querySelectorAll(`#quiz-container .quiz-item:nth-child(${index + 1}) .quiz-btn`);
             
-            // Disable buttons
+            // Desativa as opções e atualiza a pontuação uma única vez.
             buttons.forEach(btn => btn.disabled = true);
+            quizAnswered++;
+            if (userAnswer === item.answer) quizScore++;
+            updateQuizSummary();
             
             // Show feedback
             feedback.classList.add('show');
             if (userAnswer === item.answer) {
                 feedback.className = 'quiz-feedback show correct';
-                feedback.innerHTML = `✓ <strong>Correto!</strong> ${item.explanation}`;
+                feedback.textContent = `✓ Correto! ${item.explanation}`;
             } else {
                 feedback.className = 'quiz-feedback show incorrect';
-                feedback.innerHTML = `✗ <strong>Incorreto.</strong> Esta é uma ${item.answer === 'facto' ? 'FACTO' : 'OPINIÃO'}. ${item.explanation}`;
+                feedback.textContent = `✗ Revê a resposta: ${item.answer === 'facto' ? 'facto verificável' : 'opinião'}. ${item.explanation}`;
             }
+        }
+
+        function updateQuizSummary() {
+            const summary = document.getElementById("quiz-summary");
+            if (!summary) return;
+            summary.textContent = quizAnswered === quizData.length
+                ? `Quiz concluído: ${quizScore} em ${quizData.length} respostas corretas.`
+                : `Respostas: ${quizAnswered} de ${quizData.length} · Corretas: ${quizScore}`;
         }
 
         // Reset Quiz
@@ -1572,6 +1631,8 @@
             const item = header.parentElement;
             const content = header.nextElementSibling;
             const icon = header.querySelector('.accordion-icon');
+            const expanded = header.getAttribute("aria-expanded") === "true";
+            header.setAttribute("aria-expanded", String(!expanded));
             
             // Toggle active class
             header.classList.toggle('active');
@@ -1613,9 +1674,30 @@
             });
         });
 
+        // Guarda o progresso apenas neste navegador e dispositivo.
+        function initChecklist() {
+            const checks = Array.from(document.querySelectorAll('.checklist input[type="checkbox"]'));
+            const progress = document.getElementById("checklist-progress");
+            const label = document.getElementById("checklist-progress-text");
+            const storageKey = "infor-conhec-checklist-v2";
+            try {
+                const saved = JSON.parse(localStorage.getItem(storageKey) || "[]");
+                checks.forEach((check, index) => check.checked = saved[index] === true);
+            } catch (_) { /* A checklist continua utilizável sem armazenamento. */ }
+            const update = () => {
+                const done = checks.filter(check => check.checked).length;
+                progress.value = done;
+                label.textContent = `${done} de ${checks.length} passos concluídos`;
+                try { localStorage.setItem(storageKey, JSON.stringify(checks.map(check => check.checked))); } catch (_) { /* armazenamento indisponível */ }
+            };
+            checks.forEach(check => check.addEventListener("change", update));
+            update();
+        }
+
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             initQuiz();
+            initChecklist();
         });
     </script>
 
